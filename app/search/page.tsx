@@ -1,6 +1,6 @@
 import { db } from '@/db'
 import { Product, productsTable } from '@/db/schema'
-import { vectorize } from '@/lib/vectorize'
+// import { vectorize } from '@/lib/vectorize'
 import { Index } from '@upstash/vector'
 import { sql } from 'drizzle-orm'
 import { X } from 'lucide-react'
@@ -40,31 +40,31 @@ const Page = async ({ searchParams }: PageProps) => {
     )
     .limit(3)
 
-  if (products.length < 3) {
-    // search products by semantic similarity
-    const vector = await vectorize(query)
+  // if (products.length < 3) {
+  //   // search products by semantic similarity
+  //   const vector = await vectorize(query)
 
-    const res = await index.query({
-      topK: 5,
-      vector,
-      includeMetadata: true,
-    })
+  //   const res = await index.query({
+  //     topK: 5,
+  //     vector,
+  //     includeMetadata: true,
+  //   })
 
-    const vectorProducts = res
-      .filter((existingProduct) => {
-        if (
-          products.some((product) => product.id === existingProduct.id) ||
-          existingProduct.score < 0.9
-        ) {
-          return false
-        } else {
-          return true
-        }
-      })
-      .map(({ metadata }) => metadata!)
+  //   const vectorProducts = res
+  //     .filter((existingProduct) => {
+  //       if (
+  //         products.some((product) => product.id === existingProduct.id) ||
+  //         existingProduct.score < 0.9
+  //       ) {
+  //         return false
+  //       } else {
+  //         return true
+  //       }
+  //     })
+  //     .map(({ metadata }) => metadata!)
 
-    products.push(...vectorProducts)
-  }
+  //   products.push(...vectorProducts)
+  // }
 
   if (products.length === 0) {
     return (
