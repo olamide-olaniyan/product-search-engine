@@ -4,4 +4,4 @@ A Product search engine using Postgres full-text search and semantic querying wi
 
 Vercel link
 
-https://product-search-engine.vercel.app/
+[https://product-search-engine-bice.vercel.app/](https://product-search-engine-bice.vercel.app/)
